@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: connectsphere-backend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npx tsx api/server.ts
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
