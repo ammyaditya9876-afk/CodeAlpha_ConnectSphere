@@ -47,7 +47,8 @@ export default function Meeting() {
       socketRef.current?.emit('join-room', roomId, user._id);
 
       socketRef.current?.on('user-connected', (userId: string, socketId: string) => {
-        const peer = createPeer(socketId, socketRef.current!.id, stream);
+        if (!socketRef.current?.id) return;
+        const peer = createPeer(socketId, socketRef.current.id, stream);
         peersRef.current.push({
           peerID: socketId,
           peer,
