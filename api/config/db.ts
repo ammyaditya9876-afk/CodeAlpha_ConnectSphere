@@ -1,11 +1,15 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/connectsphere');
+    const conn = await mongoose.connect(process.env.MONGODB_URI as string);
+
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error: any) {
-    console.error(`Error: ${error.message}`);
+    console.log(error.message);
     process.exit(1);
   }
 };
